@@ -1,14 +1,17 @@
 import { Stack } from 'expo-router';
 import { useEffect, useState } from 'react';
 import { Text, View } from 'react-native';
+import { useAuth } from '../auth/useAuth';
 import { initDB } from '../db/database';
 
-export default function Layout() {
+export default function RootLayout() {
   const [ready, setReady] = useState(false);
+  const { isAuthenticated, loading } = useAuth();
 
   useEffect(() => {
     initDB().then(() => setReady(true));
   }, []);
+
 
   if (!ready) {
     return (
@@ -18,5 +21,15 @@ export default function Layout() {
     );
   }
 
-  return <Stack />;
+  if (loading) return null;
+
+  return (
+    <Stack>
+      {isAuthenticated ? (
+        <Stack.Screen name="(app)" options={{ headerShown: false }} />
+      ) : (
+        <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+      )}
+    </Stack>
+  );
 }
