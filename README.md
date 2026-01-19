@@ -48,3 +48,50 @@ Join our community of developers creating universal apps.
 
 - [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
 - [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+
+```
+my-app/
+│
+├─ app/
+│   ├─ _layout.tsx          # Layout global con providers
+│   ├─ index.tsx            # Home screen
+│   ├─ users/
+│   │   ├─ index.tsx        # Lista de usuarios
+│   │   ├─ create.tsx       # Form de creación
+│   │   └─ [id].tsx         # Detalle de usuario
+│   ├─ settings/
+│   │   └─ index.tsx
+│   └─ dashboard/
+│       └─ index.tsx
+│
+├─ components/              # UI reutilizable
+│   ├─ Button.tsx
+│   ├─ InputField.tsx
+│   └─ Card.tsx
+│
+├─ db/                      # Base de datos y migraciones
+│   ├─ database.ts
+│   ├─ migrations/
+│   │   ├─ 001_create_users.ts
+│   │   └─ 002_add_age_column.ts
+│   └─ repositories/
+│       └─ UserRepository.ts
+│
+├─ hooks/                   # Custom hooks
+│   └─ useUsers.ts
+│
+├─ context/                 # Providers y contextos globales
+│   └─ UserContext.tsx
+│
+├─ services/                # Lógica de negocio y APIs
+│   └─ apiService.ts
+│
+├─ types/                   # Tipos TypeScript
+│   └─ User.ts
+│
+├─ utils/                   # Helpers y utilidades
+├─ assets/                  # Imágenes, fuentes
+├─ package.json
+├─ tsconfig.json
+└─ app.json / expo.config.js
+```
