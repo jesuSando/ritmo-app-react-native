@@ -13,7 +13,7 @@ export default function Layout() {
   if (!ready) {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Text>Inicializando base de datos…</Text>
+        <Text>Cargando…</Text>
       </View>
     );
   }

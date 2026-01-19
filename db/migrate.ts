@@ -1,35 +1,26 @@
 import { SQLiteDatabase } from 'expo-sqlite';
-import * as m001 from './migrations/001_create_users';
+import { createUsers } from './migrations/001_create_users';
+import { createFinanceAccounts } from './migrations/002_create_finance_accounts';
 
-type Migration = {
-    name: string;
-    up: (db: SQLiteDatabase) => Promise<void>;
-};
-
-const migrations: Migration[] = [
-    { name: '001_create_users', up: m001.up },
+const migrations = [
+    createUsers,
+    createFinanceAccounts
 ];
 
-export async function runMigrations(db: SQLiteDatabase) {
-    const result = await db.getAllAsync<{ name: string }>(
-        'SELECT name FROM migrations'
-    );
-
-    const executed = result.map(m => m.name);
-
+export const runMigrations = async (db: SQLiteDatabase) => {
     for (const migration of migrations) {
-        if (!executed.includes(migration.name)) {
-            console.log(`[MIGRATION] Ejecutando ${migration.name}`);
+        const result = await db.getFirstAsync<{ count: number }>(
+            'SELECT COUNT(*) as count FROM migrations WHERE name = ?',
+            [migration.name]
+        );
 
+        if (result?.count === 0) {
+            console.log(`[MIGRATION] Running ${migration.name}`);
             await migration.up(db);
-
             await db.runAsync(
                 'INSERT INTO migrations (name, run_at) VALUES (?, ?)',
-                migration.name,
-                new Date().toISOString()
+                [migration.name, new Date().toISOString()]
             );
         }
     }
-
-    console.log('[MIGRATION] Migraciones al día');
-}
+};

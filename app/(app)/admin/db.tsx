@@ -7,7 +7,7 @@ import {
     TouchableOpacity,
     View
 } from 'react-native';
-import { getDB } from '../../db/database';
+import { getDB } from '../../../db/database';
 
 interface TableInfo {
     name: string;
@@ -18,10 +18,6 @@ interface TableInfo {
 }
 
 export default function DBInspector() {
-
-    if (!__DEV__) {
-        return null;
-    }
 
     const [tables, setTables] = useState<TableInfo[]>([]);
     const [loading, setLoading] = useState(true);
