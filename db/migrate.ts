@@ -6,6 +6,10 @@ import { createTransactions } from './migrations/004_create_transactions';
 import { createRoutines } from './migrations/005_create_routines';
 import { createTasks } from './migrations/006_create_tasks';
 import { createTaskDependencies } from './migrations/007_create_task_dependencies';
+import { createTimeBlocks } from './migrations/008_create_time_blocks';
+import { createHabitLogs } from './migrations/009_create_habit_logs';
+import { createLifeNotes } from './migrations/010_create_life_notes';
+import { createNotificationsQueue } from './migrations/011_create_notifications_queue';
 
 const migrations = [
     createUsers,
@@ -14,7 +18,11 @@ const migrations = [
     createTransactions,
     createRoutines,
     createTasks,
-    createTaskDependencies
+    createTaskDependencies,
+    createTimeBlocks,
+    createHabitLogs,
+    createLifeNotes,
+    createNotificationsQueue
 ];
 
 export const runMigrations = async (db: SQLiteDatabase) => {
