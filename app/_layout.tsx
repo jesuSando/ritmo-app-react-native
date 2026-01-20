@@ -12,7 +12,6 @@ export default function RootLayout() {
     initDB().then(() => setReady(true));
   }, []);
 
-
   if (!ready) {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -24,11 +23,11 @@ export default function RootLayout() {
   if (loading) return null;
 
   return (
-    <Stack>
+    <Stack screenOptions={{ headerShown: false }}>
       {isAuthenticated ? (
-        <Stack.Screen name="(app)" options={{ headerShown: false }} />
+        <Stack.Screen name="(app)" />
       ) : (
-        <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+        <Stack.Screen name="(auth)" />
       )}
     </Stack>
   );
