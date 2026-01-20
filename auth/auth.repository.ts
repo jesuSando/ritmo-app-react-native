@@ -1,16 +1,11 @@
+import { User } from '@/types/User';
 import { SQLiteDatabase } from 'expo-sqlite';
-
-export interface User {
-    id: number;
-    name: string;
-    email: string;
-    password_hash: string;
-}
 
 export const createUser = async (
     db: SQLiteDatabase,
     user: Omit<User, 'id'>
 ) => {
+    const now = new Date().toISOString();
     const result = await db.runAsync(
         `
     INSERT INTO users (name, email, password_hash, created_at, updated_at)
@@ -20,8 +15,8 @@ export const createUser = async (
             user.name,
             user.email,
             user.password_hash,
-            new Date().toISOString(),
-            new Date().toISOString(),
+            now,
+            now
         ]
     );
 
@@ -35,5 +30,15 @@ export const findUserByEmail = async (
     return await db.getFirstAsync<User>(
         'SELECT * FROM users WHERE email = ?',
         [email]
+    );
+};
+
+export const findUserById = async (
+    db: SQLiteDatabase,
+    id: number
+) => {
+    return await db.getFirstAsync<User>(
+        'SELECT id, name, email, created_at, updated_at FROM users WHERE id = ?',
+        [id]
     );
 };

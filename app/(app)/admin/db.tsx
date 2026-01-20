@@ -1,4 +1,4 @@
-import * as ClipboardLib from 'expo-clipboard'; // Si estás usando Expo
+import * as ClipboardLib from 'expo-clipboard';
 import { useEffect, useState } from 'react';
 import {
     ActivityIndicator,

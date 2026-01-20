@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { ActivityIndicator, Alert, Pressable, StyleSheet, Text, View } from 'react-native';
 import { login } from '../../auth/auth.service';
-import { useDatabase } from '../../db/useDatabase';
+import { useDatabase } from '../../hooks/useDatabase';
 
 import Field from '../../components/field';
 

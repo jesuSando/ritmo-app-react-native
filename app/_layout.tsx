@@ -15,12 +15,18 @@ export default function RootLayout() {
   if (!ready) {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Text>Cargando…</Text>
+        <Text>Inicializando base de datos...</Text>
       </View>
     );
   }
 
-  if (loading) return null;
+  if (loading) {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <Text>Cargando autenticación...</Text>
+      </View>
+    );
+  }
 
   return (
     <Stack screenOptions={{ headerShown: false }}>

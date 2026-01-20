@@ -5,7 +5,7 @@ import { Controller, useForm } from 'react-hook-form';
 import { ActivityIndicator, Alert, Pressable, StyleSheet, Text, View } from 'react-native';
 import { register } from '../../auth/auth.service';
 import Field from '../../components/field';
-import { useDatabase } from '../../db/useDatabase';
+import { useDatabase } from '../../hooks/useDatabase';
 
 const COLORS = {
     primary: "#7870e6",
