@@ -1,22 +1,33 @@
+import { LinearGradient } from 'expo-linear-gradient';
 import { Stack } from 'expo-router';
+import { StyleSheet } from 'react-native';
+
+const COLORS = {
+    primary: "#7870e6",
+    secondary: "#b06ecc",
+    accent: "#ff7588",
+};
 
 export default function AuthLayout() {
     return (
-        <Stack>
-            <Stack.Screen
-                name="login"
-                options={{
-                    title: 'Iniciar Sesión',
-                    headerShown: true
+        <LinearGradient
+            colors={[COLORS.primary, COLORS.secondary, COLORS.accent]}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 1 }}
+            style={styles.container}
+        >
+            <Stack
+                screenOptions={{
+                    headerShown: false,
+                    contentStyle: { backgroundColor: 'transparent' },
                 }}
             />
-            <Stack.Screen
-                name="register"
-                options={{
-                    title: 'Registro',
-                    headerShown: true
-                }}
-            />
-        </Stack>
+        </LinearGradient>
     );
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+    },
+});
