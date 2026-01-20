@@ -1,7 +1,8 @@
+import { AppDrawerContent } from '@/components/app/AppDrawerContent';
 import { Ionicons } from '@expo/vector-icons';
 import { router } from 'expo-router';
 import { Drawer } from 'expo-router/drawer';
-import { Pressable, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { useAuth } from '../../auth/useAuth';
 
 type DrawerProps = {
@@ -19,17 +20,12 @@ export default function AppLayout() {
 
     return (
         <Drawer
+            drawerContent={(props) => <AppDrawerContent {...props} />}
             screenOptions={{
                 headerShown: false,
-                headerStyle: {
-                    backgroundColor: '#7870e6',
-                },
-                headerTintColor: '#fff',
-                headerTitleStyle: {
-                    fontWeight: 'bold',
-                },
                 drawerActiveTintColor: '#7870e6',
                 drawerInactiveTintColor: '#6b7280',
+                drawerActiveBackgroundColor: '#7870e620',
                 drawerStyle: {
                     backgroundColor: '#fff',
                     width: 280,
@@ -43,12 +39,7 @@ export default function AppLayout() {
                     drawerLabel: 'Inicio',
                     drawerIcon: ({ color, size }: DrawerProps) => (
                         <Ionicons name="home" size={size} color={color} />
-                    ),
-                    headerRight: () => (
-                        <Pressable onPress={handleLogout} style={styles.logoutButton}>
-                            <Ionicons name="log-out" size={22} color="#fff" />
-                        </Pressable>
-                    ),
+                    )
                 }}
             />
 

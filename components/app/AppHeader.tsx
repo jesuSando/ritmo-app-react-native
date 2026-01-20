@@ -26,13 +26,6 @@ export function AppHeader({ title, description, subtitle }: Props) {
       end={{ x: 1, y: 1 }}
     >
       <View style={styles.row}>
-        <Pressable
-          onPress={() => navigation.dispatch(DrawerActions.openDrawer())}
-          style={styles.menuButton}
-          hitSlop={10}
-        >
-          <Ionicons name="menu" size={26} color="white" />
-        </Pressable>
 
         <View style={styles.textBlock}>
           {title && <Text style={styles.title}>{title}</Text>}
@@ -41,6 +34,13 @@ export function AppHeader({ title, description, subtitle }: Props) {
           )}
           {subtitle && <Text style={styles.subtitle}>{subtitle}</Text>}
         </View>
+        <Pressable
+          onPress={() => navigation.dispatch(DrawerActions.openDrawer())}
+          style={styles.menuButton}
+          hitSlop={10}
+        >
+          <Ionicons name="person" size={26} color="white" />
+        </Pressable>
       </View>
     </LinearGradient>
   );
@@ -61,6 +61,9 @@ const styles = StyleSheet.create({
   menuButton: {
     marginTop: 4,
     marginRight: 16,
+    backgroundColor: 'rgba(255, 255, 255, 0.2)',
+    padding: 8,
+    borderRadius: 50,
   },
 
   textBlock: {
