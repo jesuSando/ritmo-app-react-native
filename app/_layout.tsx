@@ -6,7 +6,6 @@ import { initDB } from '../db/database';
 
 export default function RootLayout() {
   const [ready, setReady] = useState(false);
-  const { isAuthenticated, loading } = useAuth();
 
   useEffect(() => {
     initDB().then(() => setReady(true));
@@ -19,6 +18,12 @@ export default function RootLayout() {
       </View>
     );
   }
+
+  return <AppLayout />;
+}
+
+function AppLayout() {
+  const { isAuthenticated, loading } = useAuth();
 
   if (loading) {
     return (

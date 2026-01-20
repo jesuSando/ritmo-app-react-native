@@ -95,3 +95,34 @@ my-app/
 ├─ tsconfig.json
 └─ app.json / expo.config.js
 ```
+
+version 2: 
+```
+app/(app)/
+  ├── _layout.tsx          # Drawer principal
+  ├── index.tsx            # Dashboard
+  ├── finances/            # Módulo de finanzas
+  │   ├── _layout.tsx      # Tabs internas de finanzas
+  │   ├── index.tsx        # Resumen financiero
+  │   ├── accounts.tsx     # Cuentas
+  │   ├── transactions.tsx # Transacciones
+  │   └── budgets.tsx      # Presupuestos
+  ├── tasks/               # Módulo de tareas
+  │   ├── _layout.tsx
+  │   ├── index.tsx        # Calendario/Lista
+  │   ├── today.tsx        # Tareas de hoy
+  │   └── routines.tsx     # Rutinas programadas
+  ├── habits/              # Módulo de hábitos
+  │   ├── _layout.tsx
+  │   ├── index.tsx        # Seguimiento diario
+  │   ├── tracker.tsx      # Tracker
+  │   └── stats.tsx        # Estadísticas
+  ├── notes/               # Módulo de notas
+  │   ├── _layout.tsx
+  │   ├── index.tsx        # Lista de notas
+  │   └── editor.tsx       # Editor
+  └── settings/            # Configuración
+      ├── _layout.tsx
+      ├── index.tsx        # Perfil
+      └── preferences.tsx  # Preferencias
+```

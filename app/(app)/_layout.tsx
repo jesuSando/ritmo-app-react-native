@@ -1,74 +1,118 @@
 import { Ionicons } from '@expo/vector-icons';
-import { Tabs } from 'expo-router';
+import { router } from 'expo-router';
+import { Drawer } from 'expo-router/drawer';
+import { Pressable, StyleSheet } from 'react-native';
+import { useAuth } from '../../auth/useAuth';
+
+type DrawerProps = {
+    color: string;
+    size: number;
+}
 
 export default function AppLayout() {
+    const { user, logout } = useAuth();
+
+    const handleLogout = async () => {
+        await logout();
+        router.replace('/login');
+    };
+
     return (
-        <Tabs
+        <Drawer
             screenOptions={{
                 headerShown: true,
-                tabBarActiveTintColor: '#7870e6',
-                tabBarInactiveTintColor: '#6b7280',
-                tabBarStyle: {
-                    paddingBottom: 5,
-                    paddingTop: 5,
-                    height: 60,
+                headerStyle: {
+                    backgroundColor: '#7870e6',
+                },
+                headerTintColor: '#fff',
+                headerTitleStyle: {
+                    fontWeight: 'bold',
+                },
+                drawerActiveTintColor: '#7870e6',
+                drawerInactiveTintColor: '#6b7280',
+                drawerStyle: {
+                    backgroundColor: '#fff',
+                    width: 280,
                 },
             }}
         >
-            <Tabs.Screen
+            <Drawer.Screen
                 name="index"
                 options={{
-                    title: 'Inicio',
-                    tabBarIcon: ({ color, size }) => (
+                    title: 'Dashboard',
+                    drawerLabel: 'Inicio',
+                    drawerIcon: ({ color, size }: DrawerProps) => (
                         <Ionicons name="home" size={size} color={color} />
+                    ),
+                    headerRight: () => (
+                        <Pressable onPress={handleLogout} style={styles.logoutButton}>
+                            <Ionicons name="log-out" size={22} color="#fff" />
+                        </Pressable>
                     ),
                 }}
             />
-            <Tabs.Screen
+
+            <Drawer.Screen
                 name="finances"
                 options={{
                     title: 'Finanzas',
-                    tabBarIcon: ({ color, size }) => (
+                    drawerLabel: 'Finanzas',
+                    drawerIcon: ({ color, size }: DrawerProps) => (
                         <Ionicons name="wallet" size={size} color={color} />
                     ),
                 }}
             />
-            <Tabs.Screen
+
+            <Drawer.Screen
                 name="tasks"
                 options={{
-                    title: 'Tareas',
-                    tabBarIcon: ({ color, size }) => (
-                        <Ionicons name="checkmark-circle" size={size} color={color} />
+                    title: 'Gestión del Tiempo',
+                    drawerLabel: 'Tareas & Tiempo',
+                    drawerIcon: ({ color, size }: DrawerProps) => (
+                        <Ionicons name="time" size={size} color={color} />
                     ),
                 }}
             />
-            <Tabs.Screen
+
+            <Drawer.Screen
                 name="habits"
                 options={{
                     title: 'Hábitos',
-                    tabBarIcon: ({ color, size }) => (
+                    drawerLabel: 'Hábitos',
+                    drawerIcon: ({ color, size }: DrawerProps) => (
                         <Ionicons name="repeat" size={size} color={color} />
                     ),
                 }}
             />
-            <Tabs.Screen
+
+            <Drawer.Screen
                 name="notes"
                 options={{
-                    title: 'Notas',
-                    tabBarIcon: ({ color, size }) => (
+                    title: 'Notas de Vida',
+                    drawerLabel: 'Diario Personal',
+                    drawerIcon: ({ color, size }: DrawerProps) => (
                         <Ionicons name="journal" size={size} color={color} />
                     ),
                 }}
             />
-            <Tabs.Screen
-                name="profile"
+
+            <Drawer.Screen
+                name="settings"
                 options={{
-                    title: 'Perfil',
-                    tabBarIcon: ({ color, size }) => (
-                        <Ionicons name="person" size={size} color={color} />
+                    title: 'Configuración',
+                    drawerLabel: 'Configuración',
+                    drawerIcon: ({ color, size }: DrawerProps) => (
+                        <Ionicons name="settings" size={size} color={color} />
                     ),
                 }}
             />
-        </Tabs>
+        </Drawer>
     );
 }
+
+const styles = StyleSheet.create({
+    logoutButton: {
+        marginRight: 16,
+        padding: 8,
+    },
+});
