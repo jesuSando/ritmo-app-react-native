@@ -20,7 +20,7 @@ export default function AppLayout() {
     return (
         <Drawer
             screenOptions={{
-                headerShown: true,
+                headerShown: false,
                 headerStyle: {
                     backgroundColor: '#7870e6',
                 },

@@ -1,3 +1,4 @@
+import { AppHeader } from '@/components/app/AppHeader';
 import { Ionicons } from '@expo/vector-icons';
 import { router } from 'expo-router';
 import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
@@ -13,24 +14,17 @@ export default function DashboardScreen() {
 
   return (
     <ScrollView style={styles.container}>
-      <View style={styles.header}>
-        <View>
-          <Text style={styles.welcome}>¡Hola, {user?.name}!</Text>
-          <Text style={styles.date}>
-            {new Date().toLocaleDateString('es-CL', {
-              weekday: 'long',
-              year: 'numeric',
-              month: 'long',
-              day: 'numeric'
-            })}
-          </Text>
-        </View>
-        <Pressable
-        // onPress={() => router.push('/settings')}
-        >
-          <Ionicons name="settings" size={24} color="white" />
-        </Pressable>
-      </View>
+      <AppHeader
+        title={`Hola, ${user?.name ?? ''}`}
+        subtitle={
+          new Date().toLocaleDateString('es-CL', {
+            weekday: 'long',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+          })}
+        description='Bienvenido de nuevo a Ritmo'
+      />
 
       <View style={styles.quickStats}>
         <Card style={styles.statCard}>

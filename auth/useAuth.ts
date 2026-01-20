@@ -33,15 +33,18 @@ export const useAuth = () => {
         loadUser();
     }, []);
 
+    const logout = async () => {
+        await clearSession();
+        setUser(null);
+        return true;
+    };
+
     return {
         user,
         userId: user?.id ?? null,
         isAuthenticated: !!user?.id,
         loading,
-        logout: async () => {
-            await clearSession();
-            setUser(null);
-        },
+        logout,
         updateUser: (userData: User | null) => {
             setUser(userData);
         }
