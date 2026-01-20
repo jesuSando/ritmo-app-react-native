@@ -1,9 +1,9 @@
 
 import { Text, View } from 'react-native';
-export default function AccountsPage() {
+export default function TransactionsPage() {
     return <View>
         <Text>
-            Accounts Page
+            transactions Page
         </Text>
     </View>;
 }
