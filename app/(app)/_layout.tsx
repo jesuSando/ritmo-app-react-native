@@ -110,7 +110,7 @@ export default function AppLayout() {
                 }}
             />
 
-            <Tabs.Screen
+            {/* <Tabs.Screen
                 name="settings"
                 options={{
                     title: 'Configuración',
@@ -123,7 +123,7 @@ export default function AppLayout() {
                         />
                     ),
                 }}
-            />
+            /> */}
         </Tabs>
     );
 }
