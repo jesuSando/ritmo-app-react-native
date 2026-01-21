@@ -18,6 +18,11 @@ export default function AppLayout() {
         router.replace('/login');
     };
 
+    const hiddenTabs = [
+        'admin/db',
+
+    ]
+
     return (
         <Tabs
             screenOptions={{
@@ -87,7 +92,7 @@ export default function AppLayout() {
                     tabBarLabel: 'Hábitos',
                     tabBarIcon: ({ color, size, focused }: TabProps) => (
                         <Ionicons
-                            name={focused ? "repeat" : "repeat-outline"}
+                            name={focused ? "book" : "book-outline"}
                             size={size}
                             color={color}
                         />
@@ -110,20 +115,15 @@ export default function AppLayout() {
                 }}
             />
 
-            {/* <Tabs.Screen
-                name="settings"
-                options={{
-                    title: 'Configuración',
-                    tabBarLabel: 'Configuración',
-                    tabBarIcon: ({ color, size, focused }: TabProps) => (
-                        <Ionicons
-                            name={focused ? "settings" : "settings-outline"}
-                            size={size}
-                            color={color}
-                        />
-                    ),
-                }}
-            /> */}
+            {hiddenTabs.map(hiddenScreen => (
+                <Tabs.Screen
+                    key={hiddenScreen}
+                    name={hiddenScreen as any}
+                    options={{
+                        href: null,
+                    }}
+                />
+            ))}
         </Tabs>
     );
 }
