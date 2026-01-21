@@ -1,102 +1,22 @@
-# Welcome to your Expo app 👋
+# Ritmo - Gestor Personal Integral
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Una aplicación móvil completa para gestión personal que combina finanzas, organización del tiempo, seguimiento de hábitos y notas personales en una sola plataforma, construida con Expo y React Native.
 
-## Get started
+## Requerimientos
 
-1. Install dependencies
+- Node.js >= 20.19.4 (recommended via nvm)
+- npm >= 10
+- Expo CLI
 
-   ```bash
-   npm install
-   ```
-
-2. Start the app
-
-   ```bash
-   npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
+## Instalación
 
 ```bash
-npm run reset-project
+npm install
+npm run start
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## Estructura Actual
 
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
-
-```
-my-app/
-│
-├─ app/
-│   ├─ _layout.tsx          # Layout global con providers
-│   ├─ index.tsx            # Home screen
-│   ├─ users/
-│   │   ├─ index.tsx        # Lista de usuarios
-│   │   ├─ create.tsx       # Form de creación
-│   │   └─ [id].tsx         # Detalle de usuario
-│   ├─ settings/
-│   │   └─ index.tsx
-│   └─ dashboard/
-│       └─ index.tsx
-│
-├─ components/              # UI reutilizable
-│   ├─ Button.tsx
-│   ├─ InputField.tsx
-│   └─ Card.tsx
-│
-├─ db/                      # Base de datos y migraciones
-│   ├─ database.ts
-│   ├─ migrations/
-│   │   ├─ 001_create_users.ts
-│   │   └─ 002_add_age_column.ts
-│   └─ repositories/
-│       └─ UserRepository.ts
-│
-├─ hooks/                   # Custom hooks
-│   └─ useUsers.ts
-│
-├─ context/                 # Providers y contextos globales
-│   └─ UserContext.tsx
-│
-├─ services/                # Lógica de negocio y APIs
-│   └─ apiService.ts
-│
-├─ types/                   # Tipos TypeScript
-│   └─ User.ts
-│
-├─ utils/                   # Helpers y utilidades
-├─ assets/                  # Imágenes, fuentes
-├─ package.json
-├─ tsconfig.json
-└─ app.json / expo.config.js
-```
-
-version 2: 
 ```
 app/(app)/
   ├── _layout.tsx          # Drawer principal
@@ -126,3 +46,39 @@ app/(app)/
       ├── index.tsx        # Perfil
       └── preferences.tsx  # Preferencias
 ```
+
+## Commit Convention
+
+Este proyecto utiliza Conventional Commits, validados automáticamente
+mediante `husky` y `commitlint`.
+
+Ejemplos:
+- feat: add daily habit tracking
+- fix: handle empty database state
+- chore: setup commitlint and husky
+
+## Versionamiento y Changelog
+
+Este proyecto sigue Semantic Versioning.
+
+Todos los cambios notables son documentados en
+[CHANGELOG.md](./CHANGELOG.md) y se generan automáticamente usando
+`standard-version`, basado en Conventional Commits.
+
+### Releases
+
+```bash
+npm run release:patch
+npm run release:minor
+npm run release:major
+```
+
+## Development Notes
+
+- This project uses Expo Router with file-based routing.
+- Navigation is organized by feature modules.
+- Commit messages are validated automatically on commit.
+
+## Autor
+
+[![Jesús Sandoval](https://img.shields.io/badge/Jesús%20Sandoval-github-black?logo=github&labelColor=black&color=gray)](https://github.com/jesuSando)
