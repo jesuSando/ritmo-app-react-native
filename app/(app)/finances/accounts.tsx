@@ -1,9 +1,0 @@
-
-import { Text, View } from 'react-native';
-export default function AccountsPage() {
-    return <View>
-        <Text>
-            Accounts Page
-        </Text>
-    </View>;
-}

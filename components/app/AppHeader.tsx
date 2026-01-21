@@ -37,8 +37,9 @@ export function AppHeader({ title, description, subtitle }: Props) {
 const styles = StyleSheet.create({
   header: {
     paddingHorizontal: 20,
-    paddingTop: 40,
-    paddingBottom: 20,
+    paddingVertical: 40,
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20,
   },
 
   row: {
@@ -59,7 +60,7 @@ const styles = StyleSheet.create({
   },
 
   title: {
-    fontSize: 26,
+    fontSize: 32,
     fontWeight: '700',
     color: 'white',
     lineHeight: 32,
@@ -67,13 +68,13 @@ const styles = StyleSheet.create({
 
   description: {
     marginTop: 4,
-    fontSize: 16,
+    fontSize: 18,
     color: 'rgba(255,255,255,0.9)',
   },
 
   subtitle: {
     marginTop: 2,
-    fontSize: 13,
+    fontSize: 14,
     color: 'rgba(255,255,255,0.7)',
   },
 });
