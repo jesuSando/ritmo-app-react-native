@@ -1,5 +1,14 @@
 # Ritmo - Gestor Personal Integral
 
+![Node.js](https://img.shields.io/badge/Node.js-20.19.4-brightgreen)
+![npm](https://img.shields.io/badge/npm-10-blue)
+![Expo](https://img.shields.io/badge/Expo-54.0.31-9cf)
+![React Native](https://img.shields.io/badge/React%20Native-0.81.5-61dafb)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.9.2-3178c6)
+![Husky](https://img.shields.io/badge/Husky-9.1.7-orange)
+![Commitlint](https://img.shields.io/badge/Commitlint-20.3.1-red)
+![Standard Version](https://img.shields.io/badge/standard--version-9.5.0-lightgrey)
+
 Una aplicación móvil completa para gestión personal que combina finanzas, organización del tiempo, seguimiento de hábitos y notas personales en una sola plataforma, construida con Expo y React Native.
 
 ## Requerimientos

@@ -1,3 +1,4 @@
+import { User } from '@/types/User'; // Importa el tipo User
 import * as Crypto from 'expo-crypto';
 import { SQLiteDatabase } from 'expo-sqlite';
 import { createUser, findUserByEmail } from './auth.repository';
@@ -24,7 +25,7 @@ export const register = async (
     name: string,
     email: string,
     password: string
-) => {
+): Promise<number> => {
     const existing = await findUserByEmail(db, email);
     if (existing) throw new Error('Email ya registrado');
 
@@ -43,7 +44,7 @@ export const login = async (
     db: SQLiteDatabase,
     email: string,
     password: string
-) => {
+): Promise<User> => { // Cambiado para retornar User
     const user = await findUserByEmail(db, email);
     if (!user) throw new Error('Usuario no encontrado');
 
@@ -51,7 +52,7 @@ export const login = async (
     if (!valid) throw new Error('Password incorrecta');
 
     await saveSession(user.id);
-    return user;
+    return user; // Retorna el usuario completo
 };
 
 export const logout = async () => {

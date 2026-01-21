@@ -1,12 +1,9 @@
 import { COLORS } from '@/constants/colors';
-import { Ionicons } from '@expo/vector-icons';
-import { DrawerActions, useNavigation } from '@react-navigation/native';
 import { LinearGradient } from 'expo-linear-gradient';
 import {
-  Pressable,
   StyleSheet,
   Text,
-  View,
+  View
 } from 'react-native';
 
 type Props = {
@@ -16,8 +13,6 @@ type Props = {
 };
 
 export function AppHeader({ title, description, subtitle }: Props) {
-  const navigation = useNavigation();
-
   return (
     <LinearGradient
       colors={[COLORS.primary, COLORS.secondary, COLORS.accent]}
@@ -34,13 +29,6 @@ export function AppHeader({ title, description, subtitle }: Props) {
           )}
           {subtitle && <Text style={styles.subtitle}>{subtitle}</Text>}
         </View>
-        <Pressable
-          onPress={() => navigation.dispatch(DrawerActions.openDrawer())}
-          style={styles.menuButton}
-          hitSlop={10}
-        >
-          <Ionicons name="person" size={26} color="white" />
-        </Pressable>
       </View>
     </LinearGradient>
   );

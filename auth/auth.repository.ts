@@ -3,7 +3,7 @@ import { SQLiteDatabase } from 'expo-sqlite';
 
 export const createUser = async (
     db: SQLiteDatabase,
-    user: Omit<User, 'id'>
+    user: Omit<User, 'id' | 'created_at' | 'updated_at'>
 ) => {
     const now = new Date().toISOString();
     const result = await db.runAsync(

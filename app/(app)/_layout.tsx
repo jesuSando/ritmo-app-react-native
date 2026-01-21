@@ -1,13 +1,13 @@
-import { AppDrawerContent } from '@/components/app/AppDrawerContent';
 import { Ionicons } from '@expo/vector-icons';
 import { router } from 'expo-router';
-import { Drawer } from 'expo-router/drawer';
+import { Tabs } from 'expo-router/tabs';
 import { StyleSheet } from 'react-native';
 import { useAuth } from '../../auth/useAuth';
 
-type DrawerProps = {
+type TabProps = {
     color: string;
     size: number;
+    focused: boolean;
 }
 
 export default function AppLayout() {
@@ -19,85 +19,112 @@ export default function AppLayout() {
     };
 
     return (
-        <Drawer
-            drawerContent={(props) => <AppDrawerContent {...props} />}
+        <Tabs
             screenOptions={{
                 headerShown: false,
-                drawerActiveTintColor: '#7870e6',
-                drawerInactiveTintColor: '#6b7280',
-                drawerActiveBackgroundColor: '#7870e620',
-                drawerStyle: {
+                tabBarActiveTintColor: '#7870e6',
+                tabBarInactiveTintColor: '#6b7280',
+                tabBarStyle: {
                     backgroundColor: '#fff',
-                    width: 280,
+                    borderTopColor: '#e5e7eb',
+                    paddingBottom: 4,
+                },
+                tabBarLabelStyle: {
+                    fontSize: 12,
+                    fontWeight: '500',
                 },
             }}
         >
-            <Drawer.Screen
+            <Tabs.Screen
                 name="index"
                 options={{
-                    title: 'Dashboard',
-                    drawerLabel: 'Inicio',
-                    drawerIcon: ({ color, size }: DrawerProps) => (
-                        <Ionicons name="home" size={size} color={color} />
-                    )
+                    title: 'Inicio',
+                    tabBarLabel: 'Inicio',
+                    tabBarIcon: ({ color, size, focused }: TabProps) => (
+                        <Ionicons
+                            name={focused ? "home" : "home-outline"}
+                            size={size}
+                            color={color}
+                        />
+                    ),
                 }}
             />
 
-            <Drawer.Screen
+            <Tabs.Screen
                 name="finances"
                 options={{
                     title: 'Finanzas',
-                    drawerLabel: 'Finanzas',
-                    drawerIcon: ({ color, size }: DrawerProps) => (
-                        <Ionicons name="wallet" size={size} color={color} />
+                    tabBarLabel: 'Finanzas',
+                    tabBarIcon: ({ color, size, focused }: TabProps) => (
+                        <Ionicons
+                            name={focused ? "wallet" : "wallet-outline"}
+                            size={size}
+                            color={color}
+                        />
                     ),
                 }}
             />
 
-            <Drawer.Screen
+            <Tabs.Screen
                 name="tasks"
                 options={{
-                    title: 'Gestión del Tiempo',
-                    drawerLabel: 'Tareas & Tiempo',
-                    drawerIcon: ({ color, size }: DrawerProps) => (
-                        <Ionicons name="time" size={size} color={color} />
+                    title: 'Tareas',
+                    tabBarLabel: 'Tareas',
+                    tabBarIcon: ({ color, size, focused }: TabProps) => (
+                        <Ionicons
+                            name={focused ? "time" : "time-outline"}
+                            size={size}
+                            color={color}
+                        />
                     ),
                 }}
             />
 
-            <Drawer.Screen
+            <Tabs.Screen
                 name="habits"
                 options={{
                     title: 'Hábitos',
-                    drawerLabel: 'Hábitos',
-                    drawerIcon: ({ color, size }: DrawerProps) => (
-                        <Ionicons name="repeat" size={size} color={color} />
+                    tabBarLabel: 'Hábitos',
+                    tabBarIcon: ({ color, size, focused }: TabProps) => (
+                        <Ionicons
+                            name={focused ? "repeat" : "repeat-outline"}
+                            size={size}
+                            color={color}
+                        />
                     ),
                 }}
             />
 
-            <Drawer.Screen
+            <Tabs.Screen
                 name="notes"
                 options={{
-                    title: 'Notas de Vida',
-                    drawerLabel: 'Diario Personal',
-                    drawerIcon: ({ color, size }: DrawerProps) => (
-                        <Ionicons name="journal" size={size} color={color} />
+                    title: 'Diario',
+                    tabBarLabel: 'Diario',
+                    tabBarIcon: ({ color, size, focused }: TabProps) => (
+                        <Ionicons
+                            name={focused ? "journal" : "journal-outline"}
+                            size={size}
+                            color={color}
+                        />
                     ),
                 }}
             />
 
-            <Drawer.Screen
+            <Tabs.Screen
                 name="settings"
                 options={{
                     title: 'Configuración',
-                    drawerLabel: 'Configuración',
-                    drawerIcon: ({ color, size }: DrawerProps) => (
-                        <Ionicons name="settings" size={size} color={color} />
+                    tabBarLabel: 'Configuración',
+                    tabBarIcon: ({ color, size, focused }: TabProps) => (
+                        <Ionicons
+                            name={focused ? "settings" : "settings-outline"}
+                            size={size}
+                            color={color}
+                        />
                     ),
                 }}
             />
-        </Drawer>
+        </Tabs>
     );
 }
 
