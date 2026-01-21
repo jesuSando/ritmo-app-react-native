@@ -1,7 +1,9 @@
 import { AppHeader } from '@/components/app/AppHeader';
+import { COLORS } from '@/constants/colors';
 import { Ionicons } from '@expo/vector-icons';
 import { Slot, usePathname, useRouter } from 'expo-router';
 import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+
 
 const TABS = [
     { label: 'Resumen', href: '/finances', icon: 'pie-chart' },
@@ -51,7 +53,7 @@ export default function FinancesLayout() {
                 })}
             </View>
 
-            <View>
+            <View style={{ backgroundColor: COLORS.background }}>
                 <Slot />
             </View>
         </ScrollView>
@@ -61,12 +63,13 @@ export default function FinancesLayout() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: COLORS.background
     },
     tabs: {
         marginHorizontal: 16,
         marginVertical: 8,
         flexDirection: 'row',
-        backgroundColor: '#f9fafb',
+        backgroundColor: '#fff',
         borderRadius: 16,
         padding: 4,
     },
@@ -88,11 +91,11 @@ const styles = StyleSheet.create({
     },
     text: {
         fontSize: 12,
-        color: '#6b7280',
+        color: COLORS.textSecondary,
     },
     activeText: {
         fontSize: 12,
-        color: '#7870e6',
+        color: COLORS.primary,
         fontWeight: '600',
     },
 });

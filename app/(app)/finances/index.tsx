@@ -1,4 +1,3 @@
-import { AppHeader } from '@/components/app/AppHeader';
 import { Ionicons } from '@expo/vector-icons';
 import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { Card } from '../../../components/card';
@@ -19,12 +18,6 @@ export default function FinancesOverviewScreen() {
 
     return (
         <ScrollView style={styles.container}>
-            <AppHeader
-                title={'Resumen Financiero'}
-                subtitle='Todo en un solo lugar.'
-                description='Gestiona tus finanzas con Ritmo.'
-            />
-
             <Card style={styles.balanceCard}>
                 <Text style={styles.balanceLabel}>Balance Total</Text>
                 <Text style={styles.balanceAmount}>
