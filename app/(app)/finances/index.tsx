@@ -98,7 +98,6 @@ export default function FinancesOverviewScreen() {
                         </Pressable>
                     </Card>
 
-                    {/* Estado vacío */}
                     {accounts.length === 0 && (
                         <Card style={styles.emptyCard}>
                             <Ionicons name="add-circle" size={64} color={COLORS.primary} />

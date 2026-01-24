@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useAuth } from '../auth/useAuth';
+import { FinanceAccountRepository } from '../db/repositories/FinanceAccountRepository';
 import { TransactionRepository } from '../db/repositories/TransactionRepository';
 import { Transaction, TransactionType } from '../types/Transaction';
 
@@ -54,11 +55,27 @@ export function useTransactions(filters?: {
         accountId: number,
         description?: string
     ) => {
-        if (!user?.id) return;
+        if (!user?.id) throw new Error('Usuario no autenticado');
 
         try {
             setError(null);
 
+            // Obtener cuenta actual
+            const account = await FinanceAccountRepository.findById(accountId);
+            if (!account) {
+                throw new Error('Cuenta no encontrada');
+            }
+
+            // Actualizar balance de la cuenta
+            const newBalance = type === 'income'
+                ? account.current_balance + amount
+                : account.current_balance - amount;
+
+            await FinanceAccountRepository.update(accountId, {
+                current_balance: newBalance,
+            });
+
+            // Crear transacción
             await TransactionRepository.create({
                 amount,
                 type,
@@ -71,7 +88,10 @@ export function useTransactions(filters?: {
                 user_id: user.id,
             });
 
+            // Recargar transacciones
             await loadTransactions();
+
+            return true;
         } catch (err) {
             console.error(err);
             setError('Error creando transacción');
@@ -82,6 +102,24 @@ export function useTransactions(filters?: {
     const deleteTransaction = useCallback(async (id: number) => {
         try {
             setError(null);
+
+            // Obtener transacción primero para revertir el balance
+            const transaction = await TransactionRepository.findById(id);
+            if (transaction) {
+                const account = await FinanceAccountRepository.findById(transaction.account_id);
+                if (account) {
+                    // Revertir el balance
+                    const newBalance = transaction.type === 'income'
+                        ? account.current_balance - transaction.amount
+                        : account.current_balance + transaction.amount;
+
+                    await FinanceAccountRepository.update(account.id, {
+                        current_balance: newBalance,
+                    });
+                }
+            }
+
+            // Eliminar transacción
             await TransactionRepository.delete(id);
             await loadTransactions();
         } catch (err) {
