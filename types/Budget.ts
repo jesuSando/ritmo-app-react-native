@@ -1,17 +1,17 @@
-export type BudgetPeriod = 'daily' | 'weekly' | 'monthly' | 'yearly';
+export type BudgetPeriod = 'daily' | 'weekly' | 'monthly' | 'yearly' | 'custom';
 
 export interface Budget {
     id: number;
     name: string;
     amount: number;
-    category?: string;
+    spent_amount: number;
+    category: string | null;
     period: BudgetPeriod;
     start_date: string;
-    end_date?: string;
+    end_date: string | null;
     is_active: boolean;
-    spent_amount: number;
+    account_id: number | null;
+    user_id: number;
     created_at: string;
     updated_at: string;
-    account_id?: number;
-    user_id: number;
 }
