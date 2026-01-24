@@ -36,13 +36,19 @@ export function useFinanceAccounts() {
         currency: FinanceAccount['currency'],
         initialBalance: number
     ) => {
-        if (!user?.id) return;
+        if (!user?.id) {
+            throw new Error('Usuario no autenticado');
+        }
+
+        if (!name.trim()) {
+            throw new Error('El nombre de la cuenta es requerido');
+        }
 
         try {
             setError(null);
 
             await FinanceAccountRepository.create({
-                name,
+                name: name.trim(),
                 type,
                 currency,
                 initial_balance: initialBalance,
@@ -55,6 +61,7 @@ export function useFinanceAccounts() {
         } catch (err) {
             console.error(err);
             setError('Error creando cuenta');
+            throw err;
         }
     }, [user?.id, loadAccounts]);
 

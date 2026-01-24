@@ -8,6 +8,8 @@ import {
     View,
 } from 'react-native';
 
+import { COLORS } from '@/constants/colors';
+
 type FieldType = 'text' | 'email' | 'password' | 'number';
 
 interface FieldProps extends TextInputProps {
@@ -51,7 +53,7 @@ export default function Field({ label, type, error, value, onChangeText, onBlur,
                     color: error
                         ? '#e53935'
                         : focused
-                            ? '#ff7588'
+                            ? COLORS.primary
                             : '#555',
                 }}
             >
@@ -78,7 +80,7 @@ export default function Field({ label, type, error, value, onChangeText, onBlur,
                     borderColor: error
                         ? '#e53935'
                         : focused
-                            ? '#ff7588'
+                            ? COLORS.primary
                             : '#ccc',
                 }}
             />
@@ -108,7 +110,7 @@ export default function Field({ label, type, error, value, onChangeText, onBlur,
                                 error
                                     ? '#e53935'
                                     : focused
-                                        ? '#ff7588'
+                                        ? COLORS.primary
                                         : '#ccc'
                             }
                         />
@@ -120,7 +122,7 @@ export default function Field({ label, type, error, value, onChangeText, onBlur,
                                 error
                                     ? '#e53935'
                                     : focused
-                                        ? '#ff7588'
+                                        ? COLORS.primary
                                         : '#ccc'
                             }
                         />
