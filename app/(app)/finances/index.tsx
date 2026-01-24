@@ -10,6 +10,7 @@ import { formatCurrency } from '../../../utils/formatters';
 export default function FinancesOverviewScreen() {
     const { accounts, loading, createAccount } = useFinanceAccounts();
     const [isModalVisible, setIsModalVisible] = useState(false);
+    const [seeAllAccounts, setSeeAllAccounts] = useState(false);
 
     if (loading) {
         return (
@@ -31,30 +32,32 @@ export default function FinancesOverviewScreen() {
     return (
         <>
             <ScrollView style={styles.container}>
-                {/* Sección de Cuentas */}
                 <View style={styles.section}>
                     <View style={styles.sectionHeader}>
                         <Text style={styles.sectionTitle}>Cuentas</Text>
                         {accounts.length > 0 && (
-                            <Pressable onPress={() => { /* Navegar a todas las cuentas */ }}>
-                                <Text style={styles.seeAll}>Ver todas</Text>
+                            <Pressable onPress={() => setSeeAllAccounts(!seeAllAccounts)}>
+                                <Text style={styles.seeAll}>{seeAllAccounts ? 'Ver menos' : 'Ver todas'}</Text>
                             </Pressable>
                         )}
                     </View>
 
-                    {accounts.slice(0, 3).map(account => (
+                    {(seeAllAccounts ? accounts : accounts.slice(0, 3)).map(account => (
                         <Card key={account.id} style={styles.accountCard}>
                             <View style={styles.accountInfo}>
-                                <View style={[
-                                    styles.accountIcon,
-                                    { backgroundColor: getAccountColor(account.type) + '20' }
-                                ]}>
+                                <View
+                                    style={[
+                                        styles.accountIcon,
+                                        { backgroundColor: getAccountColor(account.type) + '20' }
+                                    ]}
+                                >
                                     <Ionicons
                                         name={getAccountIcon(account.type)}
                                         size={20}
                                         color={getAccountColor(account.type)}
                                     />
                                 </View>
+
                                 <View style={styles.accountDetails}>
                                     <Text style={styles.accountName}>{account.name}</Text>
                                     <Text style={styles.accountType}>
@@ -65,18 +68,20 @@ export default function FinancesOverviewScreen() {
                                     </Text>
                                 </View>
                             </View>
-                            <Text style={[
-                                styles.accountBalance,
-                                account.current_balance < 0 && { color: COLORS.error }
-                            ]}>
+
+                            <Text
+                                style={[
+                                    styles.accountBalance,
+                                    account.current_balance < 0 && { color: COLORS.error }
+                                ]}
+                            >
                                 {formatCurrency(account.current_balance, account.currency)}
                             </Text>
                         </Card>
                     ))}
 
-                    {/* Botón para agregar cuenta */}
                     <Card style={styles.addAccountCard}>
-                        <Pressable 
+                        <Pressable
                             style={styles.addAccountButton}
                             onPress={() => setIsModalVisible(true)}
                         >
@@ -253,6 +258,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         padding: 16,
+        gap: 5,
     },
     addAccountIcon: {
         width: 48,
