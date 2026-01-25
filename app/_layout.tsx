@@ -1,3 +1,4 @@
+import { COLORS } from '@/constants/colors';
 import { Stack } from 'expo-router';
 import { useEffect, useState } from 'react';
 import { Text, View } from 'react-native';
@@ -34,12 +35,14 @@ function AppLayout() {
   }
 
   return (
-    <Stack screenOptions={{ headerShown: false }}>
-      {isAuthenticated ? (
-        <Stack.Screen name="(app)" />
-      ) : (
-        <Stack.Screen name="(auth)" />
-      )}
-    </Stack>
+    <View style={{ flex: 1, backgroundColor: COLORS.background }}>
+      <Stack screenOptions={{ headerShown: false }}>
+        {isAuthenticated ? (
+          <Stack.Screen name="(app)" />
+        ) : (
+          <Stack.Screen name="(auth)" />
+        )}
+      </Stack>
+    </View>
   );
 }

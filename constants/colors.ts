@@ -25,9 +25,9 @@ export const COLORS = {
     /* =====================
      * Backgrounds & Borders
      * ===================== */
-    background: "#f9fafb",
+    background: "#f4f6f7",
     surface: "#ffffff",
-    border: "#e5e7eb",
+    border: "#1953c8",
 
     /* =====================
      * Modules
@@ -36,7 +36,7 @@ export const COLORS = {
         primary: "#22c55e",
         income: "#16a34a",
         expense: "#ef4444",
-        background: "#ecfdf5",
+        background: "#d9dade",
     },
 
     tasks: {
