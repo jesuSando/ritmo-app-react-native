@@ -9,7 +9,8 @@ export function formatCurrency(amount: number, currency: string): string {
 }
 
 export function formatDate(date: string): string {
-    return new Date(date).toLocaleDateString('es-CL', {
+    const d = parseLocalDate(date);
+    return d.toLocaleDateString('es-CL', {
         day: 'numeric',
         month: 'short',
         year: 'numeric',
@@ -21,4 +22,9 @@ export function formatTime(time: string): string {
         hour: '2-digit',
         minute: '2-digit',
     });
+}
+
+export function parseLocalDate(date: string) {
+    const [year, month, day] = date.split('-').map(Number);
+    return new Date(year, month - 1, day);
 }

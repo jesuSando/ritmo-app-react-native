@@ -1,10 +1,10 @@
-// app/finances/transactions.tsx
 import { Card } from '@/components/card';
 import { CreateTransactionModal } from '@/components/finances/CreateTransactionModal';
+import { DayTransactionsList } from '@/components/finances/DayTransactionsList';
 import { COLORS } from '@/constants/colors';
 import { useFinanceAccounts } from '@/hooks/useFinanceAccounts';
 import { useTransactions } from '@/hooks/useTransactions';
-import { formatCurrency } from '@/utils/formatters';
+import { formatCurrency, parseLocalDate } from '@/utils/formatters';
 import { Ionicons } from '@expo/vector-icons';
 import { format } from 'date-fns';
 import { es } from 'date-fns/locale';
@@ -72,7 +72,7 @@ export default function TransactionsPage() {
         const groups: Record<string, typeof transactions> = {};
 
         filteredTransactions.forEach(transaction => {
-            const date = new Date(transaction.date);
+            const date = parseLocalDate(transaction.date);
             const dateKey = format(date, 'yyyy-MM-dd');
 
             if (!groups[dateKey]) {
@@ -85,7 +85,7 @@ export default function TransactionsPage() {
             .sort(([dateA], [dateB]) => dateB.localeCompare(dateA))
             .map(([date, transactions]) => ({
                 date,
-                formattedDate: format(new Date(date), "EEEE, d 'de' MMMM", { locale: es }),
+                formattedDate: format(parseLocalDate(date), "EEEE, d 'de' MMMM", { locale: es }),
                 transactions: transactions.sort((a, b) =>
                     new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
                 ),
@@ -298,7 +298,6 @@ export default function TransactionsPage() {
                     </View>
                 </View>
 
-                {/* Lista de transacciones */}
                 <View style={styles.section}>
                     <ScrollView style={styles.transactionsList}>
                         {groupedTransactions.length === 0 ? (
@@ -321,84 +320,19 @@ export default function TransactionsPage() {
                             </Card>
                         ) : (
                             groupedTransactions.map(group => (
-                                <View key={group.date} style={styles.dateGroup}>
-                                    <Text style={styles.dateHeader}>{group.formattedDate}</Text>
-                                    {group.transactions.map(transaction => (
-                                        <Card key={transaction.id} style={styles.transactionCard}>
-                                            <View style={styles.transactionLeft}>
-                                                <View
-                                                    style={[
-                                                        styles.transactionIcon,
-                                                        {
-                                                            backgroundColor:
-                                                                transaction.type === 'income'
-                                                                    ? '#10b98120'
-                                                                    : '#ef444420',
-                                                        },
-                                                    ]}
-                                                >
-                                                    <Ionicons
-                                                        name={
-                                                            transaction.type === 'income'
-                                                                ? 'arrow-down'
-                                                                : 'arrow-up'
-                                                        }
-                                                        size={20}
-                                                        color={
-                                                            transaction.type === 'income'
-                                                                ? COLORS.success
-                                                                : COLORS.error
-                                                        }
-                                                    />
-                                                </View>
-                                                <View style={styles.transactionDetails}>
-                                                    <Text style={styles.transactionCategory}>
-                                                        {transaction.category}
-                                                    </Text>
-                                                    {transaction.description ? (
-                                                        <Text style={styles.transactionDescription}>
-                                                            {transaction.description}
-                                                        </Text>
-                                                    ) : null}
-                                                    <Text style={styles.transactionAccount}>
-                                                        {accounts.find(a => a.id === transaction.account_id)
-                                                            ?.name || 'Cuenta'}
-                                                    </Text>
-                                                </View>
-                                            </View>
-                                            <View style={styles.transactionRight}>
-                                                <Text
-                                                    style={[
-                                                        styles.transactionAmount,
-                                                        transaction.type === 'income'
-                                                            ? styles.incomeAmount
-                                                            : styles.expenseAmount,
-                                                    ]}
-                                                >
-                                                    {transaction.type === 'income' ? '+' : '-'}
-                                                    {formatCurrency(transaction.amount, 'CLP')}
-                                                </Text>
-                                                <Pressable
-                                                    style={styles.deleteButton}
-                                                    onPress={() => handleDeleteTransaction(transaction.id)}
-                                                >
-                                                    <Ionicons
-                                                        name="trash-outline"
-                                                        size={18}
-                                                        color={COLORS.textSecondary}
-                                                    />
-                                                </Pressable>
-                                            </View>
-                                        </Card>
-                                    ))}
-                                </View>
+                                <DayTransactionsList
+                                    transactions={group.transactions}
+                                    accounts={accounts}
+                                    onDelete={handleDeleteTransaction}
+                                    formattedDate={group.formattedDate}
+                                    date={group.date}
+                                />
                             ))
                         )}
                     </ScrollView>
                 </View>
             </ScrollView>
 
-            {/* Modal para nueva transacción */}
             <CreateTransactionModal
                 visible={showAddModal}
                 onClose={() => setShowAddModal(false)}
