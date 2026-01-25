@@ -9,7 +9,6 @@ type Props = {
     transactions: any[];
     accounts: any[];
     onDelete: (id: number) => void;
-    date: string;
     formattedDate: string;
 };
 
@@ -17,7 +16,6 @@ export function DayTransactionsList({
     transactions,
     accounts,
     onDelete,
-    date,
     formattedDate
 }: Props) {
     const [seeAll, setSeeAll] = useState(false);
@@ -27,7 +25,7 @@ export function DayTransactionsList({
         : transactions.slice(0, 3);
 
     return (
-        <View key={date} style={{ marginBottom: 24, }}>
+        <View style={{ marginBottom: 24, }}>
             <View style={{
                 flexDirection: 'row',
                 justifyContent: 'space-between',

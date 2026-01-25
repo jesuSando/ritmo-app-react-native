@@ -284,7 +284,7 @@ export default function TransactionsPage() {
                             </Text>
                         </Card>
                         <Card style={styles.statCard}>
-                            <Text style={styles.statLabel}>Balance Mensual</Text>
+                            <Text style={styles.statLabel}>Balance Mes</Text>
                             <Text
                                 style={[
                                     styles.statValue,
@@ -321,11 +321,11 @@ export default function TransactionsPage() {
                         ) : (
                             groupedTransactions.map(group => (
                                 <DayTransactionsList
+                                    key={group.date}
                                     transactions={group.transactions}
                                     accounts={accounts}
                                     onDelete={handleDeleteTransaction}
                                     formattedDate={group.formattedDate}
-                                    date={group.date}
                                 />
                             ))
                         )}
